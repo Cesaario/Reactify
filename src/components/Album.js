@@ -1,9 +1,10 @@
 import React from 'react'
+import './Album.css'
 
-function Album(){
+function Album(props){
     return(
         <>
-            
+            <img className='albumImage' src={props.albumUrl} alt='Album'></img>
         </>
     );
 }

@@ -1,9 +1,13 @@
 import React from 'react'
 import Player from './views/Player'
 
+import './App.css'
+
 function App(){
     return (
-        <Player></Player>
+        <div className='appContainer'>
+            <Player></Player>
+        </div>
     );
 }
 
