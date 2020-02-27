@@ -23,6 +23,7 @@ function Player(){
     const playerRef = useRef(player);
 
     useEffect(() => {
+        console.log('aisdiuahisud');
         const { access_token } = getHashParams();
         setState({
           token: access_token,
@@ -138,13 +139,21 @@ function Player(){
 
     function getHashParams() {
         var hashParams = {};
-        var e,
+        /*var e,
             r = /([^&;=]+)=?([^&;]*)/g,
             q = window.location.hash.substring(1);
         while ((e = r.exec(q))) {
             hashParams[e[1]] = decodeURIComponent(e[2]);
-        }
-        return hashParams;
+        }*/
+        console.log("bbbbbbb");
+        const url = new URL(window.location.href);
+        const tokens = {
+            access_token: url.searchParams.get('access_token'),
+            refresh_token: url.searchParams.get('refresh_token')
+        };
+        console.log(tokens);
+        return tokens;
+        //return hashParams;
     }
 
     function gerarCores(cores){
