@@ -39,9 +39,14 @@ function Player(){
         });
         setTimeout(getState, 1000);
     }, []);
+    
+    useEffect(() => {
+        console.log('logado ' + state.loggedIn);
+    }, [state.loggedIn]);
 
     useEffect(() => {
-        if (state.token !== "") {
+        console.log('token ', state.token);
+        if (state.token !== "" && state.token !== undefined && state.token !== null) {
           setState({...state, loggedIn: true});
           setTimeout(checkForPlayer, 1000, state.token);
         }
@@ -59,16 +64,15 @@ function Player(){
 
     function getState(){
         if(playerRef.current){
-            playerRef.current.getCurrentState().then(state => {
-                if (!state) {
-                  console.error('User is not playing music through the Web Playback SDK');
+            playerRef.current.getCurrentState().then(estado => {
+                if (!estado) {
+                  //console.error('User is not playing music through the Web Playback SDK');
                   return;
                 }
                 setTempo({
                     pos: state.position,
                     dur: state.duration
                 })
-                console.log(state);
               });
         }
         setTimeout(getState, 1000);
@@ -99,7 +103,7 @@ function Player(){
             setState({ ...state, loggedIn: false });
         });
         player.on('account_error', e => { console.error(e); });
-        player.on('playback_error', e => { console.error(e); });
+        player.on('playback_error', e => { console.error('asdasd ', e); });
 
         // Playback status updates
         player.on('player_state_changed', estado => { onStateChanged(estado); });
@@ -128,10 +132,8 @@ function Player(){
     }
     
     function onStateChanged(estado) {
-        console.log(estado);
         if (estado != null) {
             const { current_track } = estado.track_window;
-            console.log('current', current_track);
             setMusica(current_track);
             setState({ ...state, trackName: current_track.name });
         }
@@ -145,13 +147,11 @@ function Player(){
         while ((e = r.exec(q))) {
             hashParams[e[1]] = decodeURIComponent(e[2]);
         }*/
-        console.log("bbbbbbb");
         const url = new URL(window.location.href);
         const tokens = {
             access_token: url.searchParams.get('access_token'),
             refresh_token: url.searchParams.get('refresh_token')
         };
-        console.log(tokens);
         return tokens;
         //return hashParams;
     }
@@ -160,26 +160,23 @@ function Player(){
         setColors(cores);
     }
 
-    return(
-        <>
-        {
-            state.loggedIn ? 
-            (
-                <div className='loginDiv'>
-                    <Button href="https://reactify-auth-test2.herokuapp.com/login" variant="contained" color='primary'>Faça login agora!</Button>
-                </div>
-            ):(
-                <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
+    if(state.loggedIn){
+        return(
+            <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
                     <ColorExtractor src={albumUrl} getColors={gerarCores}/>
                     <Album albumUrl={albumUrl}></Album>
                     <Info musica={musica}></Info>
                     <Controller player={player}></Controller>
                     <Progress tempo={tempo}></Progress>
                 </div>
-            )
-        }
-        </>
-    );
+        );
+    }else{
+        return(
+            <div className='loginDiv'>
+                <a href="https://reactify-auth.herokuapp.com/login">Login</a>
+            </div>
+        );
+    }
 }
 
 export default Player;

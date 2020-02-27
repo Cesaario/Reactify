@@ -7,9 +7,20 @@
 }
 
 .loginDiv{
+    background-color: #191414;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.loginDiv a{
+    background-color: #1DB954;
+    font-family: 'Roboto';
+    text-decoration: none;
+    padding: 15px 50px;
+    color: #eeeeee;
+    border-radius: 30px;
+    font-size: 24px;
 }
