@@ -34,7 +34,8 @@ function Player(){
           albumName: "Album Name",
           playing: false,
           position: 0,
-          duration: 0
+          duration: 0,
+          carregando: true
         });
         setTimeout(getState, 1000);
     }, []);
@@ -69,7 +70,6 @@ function Player(){
                   //console.error('User is not playing music through the Web Playback SDK');
                   return;
                 }
-                console.log(tempo);
                 setTempo({
                     pos: estado.position,
                     dur: estado.duration
@@ -119,7 +119,8 @@ function Player(){
             setState(antigo => (
                 {
                     ...antigo,
-                    deviceId: device_id
+                    deviceId: device_id,
+                    carregando: false
                 }
             ));
         });
@@ -170,15 +171,21 @@ function Player(){
     }
 
     if(state.loggedIn){
-        return(
-            <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
-                <ColorExtractor src={albumUrl} getColors={gerarCores}/>
-                <Album albumUrl={albumUrl}></Album>
-                <Info musica={musica}></Info>
-                <Controller player={player}></Controller>
-                <Progress tempo={tempo}></Progress>
-            </div>
-        );
+        if(!state.carregando){
+            return(
+                <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
+                    <ColorExtractor src={albumUrl} getColors={gerarCores}/>
+                    <Album albumUrl={albumUrl}></Album>
+                    <Info musica={musica}></Info>
+                    <Controller player={player}></Controller>
+                    <Progress tempo={tempo}></Progress>
+                </div>
+            );
+        }else{
+            return(
+                <div className='loadingDiv'></div>
+            );
+        }
     }else{
         return(
             <div className='loginDiv'>

@@ -29,3 +29,9 @@
     font-size: 48px;
     color: #eeeeee;
 }
+
+.loadingDiv{
+    background-color: #191414;
+    height: 100%;
+    width: 100%;
+}
