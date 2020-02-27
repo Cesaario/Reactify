@@ -166,7 +166,7 @@ function Player(){
             state.loggedIn ? 
             (
                 <div className='loginDiv'>
-                    <Button href="https://reactify-auth-test.herokuapp.com/login" variant="contained" color='primary'>Faça login agora!</Button>
+                    <Button href="https://reactify-auth-test2.herokuapp.com/login" variant="contained" color='primary'>Faça login agora!</Button>
                 </div>
             ):(
                 <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
