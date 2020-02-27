@@ -23,7 +23,6 @@ function Player(){
     const playerRef = useRef(player);
 
     useEffect(() => {
-        console.log('aisdiuahisud');
         const { access_token } = getHashParams();
         setState({
           token: access_token,
@@ -41,11 +40,9 @@ function Player(){
     }, []);
     
     useEffect(() => {
-        console.log('logado ' + state.loggedIn);
     }, [state.loggedIn]);
 
     useEffect(() => {
-        console.log('token ', state.token);
         if (state.token !== "" && state.token !== undefined && state.token !== null) {
           setState({...state, loggedIn: true});
           setTimeout(checkForPlayer, 1000, state.token);
@@ -103,7 +100,7 @@ function Player(){
             setState({ ...state, loggedIn: false });
         });
         player.on('account_error', e => { console.error(e); });
-        player.on('playback_error', e => { console.error('asdasd ', e); });
+        player.on('playback_error', e => { console.error(e); });
 
         // Playback status updates
         player.on('player_state_changed', estado => { onStateChanged(estado); });
