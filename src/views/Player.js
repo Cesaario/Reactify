@@ -15,7 +15,7 @@ const s = new Spotify();
 function Player(){
 
     const [colors, setColors] = useState(['#ffffff', '#ffffff']);
-    const [state, setState] = useState({token: ''});
+    const [state, setState] = useState({token: '', loggedIn: false});
     const [player, setPlayer] = useState(undefined);
     const [musica, setMusica] = useState({});
     const [albumUrl, setAlbumUrl] = useState('');
@@ -38,14 +38,17 @@ function Player(){
         });
         setTimeout(getState, 1000);
     }, []);
-    
-    useEffect(() => {
-    }, [state.loggedIn]);
 
     useEffect(() => {
         if (state.token !== "" && state.token !== undefined && state.token !== null) {
-          setState({...state, loggedIn: true});
-          setTimeout(checkForPlayer, 1000, state.token);
+            //setState({...state, loggedIn: true});
+            setState(antigo => (
+                {
+                    ...antigo,
+                    loggedIn: true
+                }
+            ));
+            setTimeout(checkForPlayer, 1000, state.token);
         }
     }, [state.token]);
 
@@ -66,9 +69,10 @@ function Player(){
                   //console.error('User is not playing music through the Web Playback SDK');
                   return;
                 }
+                console.log(tempo);
                 setTempo({
-                    pos: state.position,
-                    dur: state.duration
+                    pos: estado.position,
+                    dur: estado.duration
                 })
               });
         }
@@ -97,7 +101,8 @@ function Player(){
         player.on('initialization_error', e => { console.error(e); });
         player.on('authentication_error', e => {
             console.error(e);
-            setState({ ...state, loggedIn: false });
+            console.log('erro de autenticação');
+            //setState({ ...state, loggedIn: false });
         });
         player.on('account_error', e => { console.error(e); });
         player.on('playback_error', e => { console.error(e); });
@@ -109,7 +114,14 @@ function Player(){
         player.on('ready', async data => {
             let { device_id } = data;
             console.log("Pronto!");
-            setState({ ...state, deviceId: device_id });
+            console.log(state);
+            //setState({ ...state, deviceId: device_id});
+            setState(antigo => (
+                {
+                    ...antigo,
+                    deviceId: device_id
+                }
+            ));
         });
     }
     
@@ -132,13 +144,13 @@ function Player(){
         if (estado != null) {
             const { current_track } = estado.track_window;
             setMusica(current_track);
-            setState({ ...state, trackName: current_track.name });
+            //setState({ ...state, trackName: current_track.name });
         }
     }
 
     function getHashParams() {
-        var hashParams = {};
-        /*var e,
+        /*var hashParams = {};
+        var e,
             r = /([^&;=]+)=?([^&;]*)/g,
             q = window.location.hash.substring(1);
         while ((e = r.exec(q))) {
@@ -160,16 +172,17 @@ function Player(){
     if(state.loggedIn){
         return(
             <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
-                    <ColorExtractor src={albumUrl} getColors={gerarCores}/>
-                    <Album albumUrl={albumUrl}></Album>
-                    <Info musica={musica}></Info>
-                    <Controller player={player}></Controller>
-                    <Progress tempo={tempo}></Progress>
-                </div>
+                <ColorExtractor src={albumUrl} getColors={gerarCores}/>
+                <Album albumUrl={albumUrl}></Album>
+                <Info musica={musica}></Info>
+                <Controller player={player}></Controller>
+                <Progress tempo={tempo}></Progress>
+            </div>
         );
     }else{
         return(
             <div className='loginDiv'>
+                <h1>Reactify</h1>
                 <a href="https://reactify-auth.herokuapp.com/login">Login</a>
             </div>
         );

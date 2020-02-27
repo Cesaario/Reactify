@@ -24,3 +24,8 @@
     border-radius: 30px;
     font-size: 24px;
 }
+
+.loginDiv h1{
+    font-size: 48px;
+    color: #eeeeee;
+}
