@@ -18,10 +18,12 @@ function Controller(props){
 
     function proximaMusica(){
         player.nextTrack();
+        setTocando(true);
     }
 
     function musicaAnterior(){
         player.previousTrack();
+        setTocando(true);
     }
 
     return(
