@@ -3,6 +3,7 @@ import Progress from '../components/Progress'
 import Album from '../components/Album'
 import Info from '../components/Info'
 import Controller from '../components/Controller'
+import Button from '@material-ui/core/Button';
 import { ColorExtractor } from 'react-color-extractor'
 
 import './Player.css'
@@ -156,7 +157,7 @@ function Player(){
             state.loggedIn ? 
             (
                 <div className='loginDiv'>
-                    <a href="http://localhost:8888">Faça login agora!</a>
+                    <Button href="https://reactify-auth-test.herokuapp.com/login" variant="contained" color='primary'>Faça login agora!</Button>
                 </div>
             ):(
                 <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
