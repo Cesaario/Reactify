@@ -3,162 +3,66 @@ import Progress from '../components/Progress'
 import Album from '../components/Album'
 import Info from '../components/Info'
 import Controller from '../components/Controller'
-import Button from '@material-ui/core/Button';
 import { ColorExtractor } from 'react-color-extractor'
 
 import './Player.css'
 
-import Spotify from "spotify-web-api-js";
-const s = new Spotify();
+import { getState, checkForPlayer, transferPlaybackHere, getHashParams } from '../Spotify'
 
+//import Spotify from "spotify-web-api-js";
+//const s = new Spotify();
 
 function Player(){
 
     const [colors, setColors] = useState(['#ffffff', '#ffffff']);
-    const [state, setState] = useState({token: '', loggedIn: false});
+    const [state, setState] = useState({
+        token: '',
+        deviceId: '',
+        loggedIn: false,
+        carregando: true,
+        musica: {},
+        albumUrl: '',
+        tempo: {
+            pos: 0,
+            dur: 0
+        }
+    });
     const [player, setPlayer] = useState(undefined);
-    const [musica, setMusica] = useState({});
-    const [albumUrl, setAlbumUrl] = useState('');
-    const [tempo, setTempo] = useState({pos: 0, dur: 0});
     const playerRef = useRef(player);
 
     useEffect(() => {
         const { access_token } = getHashParams();
-        setState({
-          token: access_token,
-          deviceId: "",
-          loggedIn: false,
-          carregando: true
-        });
-        setTimeout(getState, 1000);
+        setState(antigo => ({
+            ...antigo,
+            token: access_token
+        }));
+        setTimeout(() => getState(playerRef, setState), 1000);
     }, []);
 
     useEffect(() => {
         if (state.token !== "" && state.token !== undefined && state.token !== null) {
-            //setState({...state, loggedIn: true});
             setState(antigo => (
                 {
                     ...antigo,
                     loggedIn: true
                 }
             ));
-            setTimeout(checkForPlayer, 1000, state.token);
+            setTimeout(() => checkForPlayer(state.token, player, setPlayer, playerRef, state, setState), 1000);
         }
     }, [state.token]);
 
     useEffect(() => {
-        transferPlaybackHere();
+        transferPlaybackHere(state);
     }, [state.deviceId]);
 
     useEffect(() => {
-        if(musica.album && musica.album.images){
-            setAlbumUrl(musica.album.images[0].url);
+        if(state.musica.album && state.musica.album.images){
+            setState(antigo => ({
+                ...antigo,
+                albumUrl: state.musica.album.images[0].url
+            }));
         }
-    }, [musica]);
-
-    function getState(){
-        if(playerRef.current){
-            playerRef.current.getCurrentState().then(estado => {
-                if (!estado) {
-                  //console.error('User is not playing music through the Web Playback SDK');
-                  return;
-                }
-                setTempo({
-                    pos: estado.position,
-                    dur: estado.duration
-                })
-              });
-        }
-        setTimeout(getState, 1000);
-    }
-
-    function checkForPlayer(authToken) {
-        if (window.Spotify !== null) {
-            const player = new window.Spotify.Player({
-                name: "Reactify",
-                getOAuthToken: cb => {
-                    cb(authToken);
-                }
-            });
-            createEventHandlers(player);
-            console.log("Conectado");
-            player.connect();
-            setPlayer(player);
-            playerRef.current = player;
-        } else {
-            setTimeout(checkForPlayer, 1000, authToken);
-        }
-    }
-      
-    function createEventHandlers(player) {
-        player.on('initialization_error', e => { console.error(e); });
-        player.on('authentication_error', e => {
-            console.error(e);
-            console.log('erro de autenticação');
-            //setState({ ...state, loggedIn: false });
-        });
-        player.on('account_error', e => { console.error(e); });
-        player.on('playback_error', e => { console.error(e); });
-
-        // Playback status updates
-        player.on('player_state_changed', estado => { onStateChanged(estado); });
-
-        // Ready
-        player.on('ready', async data => {
-            let { device_id } = data;
-            console.log("Pronto!");
-            console.log(state);
-            //setState({ ...state, deviceId: device_id});
-            setState(antigo => (
-                {
-                    ...antigo,
-                    deviceId: device_id,
-                    carregando: false
-                }
-            ));
-        });
-    }
-    
-    function transferPlaybackHere() {
-        const { deviceId, token } = state;
-        fetch("https://api.spotify.com/v1/me/player", {
-            method: "PUT",
-            headers: {
-                authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                "device_ids": [deviceId],
-                "play": false,
-            }),
-        });
-    }
-    
-    function onStateChanged(estado) {
-        if (estado != null) {
-            const { current_track } = estado.track_window;
-            setMusica(current_track);
-            //setState({ ...state, trackName: current_track.name });
-        }
-    }
-
-    function getHashParams() {
-        /*var hashParams = {};
-        var e,
-            r = /([^&;=]+)=?([^&;]*)/g,
-            q = window.location.hash.substring(1);
-        while ((e = r.exec(q))) {
-            hashParams[e[1]] = decodeURIComponent(e[2]);
-        }*/
-        const url = new URL(window.location.href);
-        const tokens = {
-            access_token: url.searchParams.get('access_token'),
-            refresh_token: url.searchParams.get('refresh_token')
-        };
-        return tokens;
-        //return hashParams;
-    }
-
+    }, [state.musica]);
     function gerarCores(cores){
         setColors(cores);
     }
@@ -167,11 +71,11 @@ function Player(){
         if(!state.carregando){
             return(
                 <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
-                    <ColorExtractor src={albumUrl} getColors={gerarCores}/>
-                    <Album albumUrl={albumUrl}></Album>
-                    <Info musica={musica}></Info>
+                    <ColorExtractor src={state.albumUrl} getColors={gerarCores}/>
+                    <Album albumUrl={state.albumUrl}></Album>
+                    <Info musica={state.musica}></Info>
                     <Controller player={player}></Controller>
-                    <Progress tempo={tempo}></Progress>
+                    <Progress tempo={state.tempo}></Progress>
                 </div>
             );
         }else{
