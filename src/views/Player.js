@@ -28,13 +28,6 @@ function Player(){
           token: access_token,
           deviceId: "",
           loggedIn: false,
-          error: "",
-          trackName: "Track Name",
-          artistName: "Artist Name",
-          albumName: "Album Name",
-          playing: false,
-          position: 0,
-          duration: 0,
           carregando: true
         });
         setTimeout(getState, 1000);
