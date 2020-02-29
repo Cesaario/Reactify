@@ -3,6 +3,7 @@ import Progress from '../components/Progress'
 import Album from '../components/Album'
 import Info from '../components/Info'
 import Controller from '../components/Controller'
+import Volume from '../components/Volume'
 import { ColorExtractor } from 'react-color-extractor'
 
 import './Player.css'
@@ -76,6 +77,7 @@ function Player(){
                     <Info musica={state.musica}></Info>
                     <Controller player={player}></Controller>
                     <Progress tempo={state.tempo}></Progress>
+                    <Volume player={player}></Volume>
                 </div>
             );
         }else{
