@@ -2,11 +2,24 @@ function createEventHandlers(player, state, setState) {
     player.on('initialization_error', e => { console.error(e); });
     player.on('authentication_error', e => {
         console.error(e);
-        console.log('erro de autenticação');
         //setState({ ...state, loggedIn: false });
+        setState(antigo => (
+            {
+                ...antigo,
+                loggedIn: false,
+            }
+        ));
     });
     player.on('account_error', e => { console.error(e); });
-    player.on('playback_error', e => { console.error(e); });
+    player.on('playback_error', e => { 
+        console.error(e);
+        setState(antigo => (
+            {
+                ...antigo,
+                loggedIn: false,
+            }
+        ));
+    });
 
     // Playback status updates
     player.on('player_state_changed', estado => { onStateChanged(estado, setState); });
