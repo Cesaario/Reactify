@@ -20,10 +20,15 @@ function Progress(props){
         setProgresso(props.tempo.pos / props.tempo.dur * 100);
     }, [props.tempo]);
 
+    function handleChange(event, val){
+        setProgresso(val);
+        props.player.seek(props.tempo.dur * 0.01 * val);
+    }
+
     return(
         <div className='progressDiv'>
             <h5 className='tempo'>{atual}</h5>
-            <Slider disabled value={progresso} aria-labelledby="continuous-slider" />
+            <Slider value={progresso} onChange={handleChange}/>
             <h5 className='tempo'>{final}</h5>
         </div>
     );

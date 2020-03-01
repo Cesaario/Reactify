@@ -76,7 +76,7 @@ function Player(){
                     <Album albumUrl={state.albumUrl}></Album>
                     <Info musica={state.musica}></Info>
                     <Controller player={player}></Controller>
-                    <Progress tempo={state.tempo}></Progress>
+                    <Progress tempo={state.tempo} player={player}></Progress>
                     <Volume player={player}></Volume>
                 </div>
             );
