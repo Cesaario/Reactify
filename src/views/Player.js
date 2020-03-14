@@ -4,6 +4,7 @@ import Album from '../components/Album'
 import Info from '../components/Info'
 import Controller from '../components/Controller'
 import Volume from '../components/Volume'
+import Pesquisa from '../components/Pesquisa'
 import { ColorExtractor } from 'react-color-extractor'
 
 import './Player.css'
@@ -73,11 +74,15 @@ function Player(){
             return(
                 <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
                     <ColorExtractor src={state.albumUrl} getColors={gerarCores}/>
-                    <Album albumUrl={state.albumUrl}></Album>
-                    <Info musica={state.musica}></Info>
-                    <Controller player={player}></Controller>
-                    <Progress tempo={state.tempo} player={player}></Progress>
-                    <Volume player={player}></Volume>
+                    <Pesquisa></Pesquisa>
+                    <div className='playerContainer'>
+                        <Album albumUrl={state.albumUrl}></Album>
+                        <Info musica={state.musica}></Info>
+                        <Controller player={player}></Controller>
+                        <Progress tempo={state.tempo} player={player}></Progress>
+                        <Volume player={player}></Volume>
+                    </div>
+                    
                 </div>
             );
         }else{
