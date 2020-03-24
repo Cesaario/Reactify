@@ -74,7 +74,7 @@ function Player(){
             return(
                 <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
                     <ColorExtractor src={state.albumUrl} getColors={gerarCores}/>
-                    <Pesquisa></Pesquisa>
+                    <Pesquisa token={state.token}></Pesquisa>
                     <div className='playerContainer'>
                         <Album albumUrl={state.albumUrl}></Album>
                         <Info musica={state.musica}></Info>

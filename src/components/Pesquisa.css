@@ -1,3 +1,52 @@
 .campoPesquisa{
-    
+    position: absolute;
+    z-index: 5;
+    margin-top: 20px;
+}
+
+.dropDown{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    border: 2px solid #9e9e9e;
+    border-radius: 3px;
+    background-color: rgba(158, 158, 158, 0.5);
+    width: 205px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.dropDown img{
+    width: 50px;
+    height: 50px;
+}
+
+.dropDown li{
+    padding: 0;
+}
+
+.itemPesquisa{
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.itemPesquisa:hover{
+    background-color: rgba(158, 158, 158, 0.5);
+    cursor: pointer;
+}
+
+.textoItemPesquisa{
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.textoItemPesquisa span{
+    font-family: 'Roboto';
+    text-shadow: 1px 1px 5px #333333;
+    font-weight: 100;
+    color: #eeeeee;
 }
