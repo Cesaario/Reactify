@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import TextField from '@material-ui/core/TextField';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { grey } from '@material-ui/core/colors';
+import Play from '../PlayURI'
 
 import './Pesquisa.css'
 
@@ -40,6 +41,10 @@ function Pesquisa(props){
 
     function tocarMusica(musica){
         setPesquisa('');
+        Play({
+            playerInstance: props.player,
+            spotify_uri: musica,
+        })
         console.log(musica);
     }
 
