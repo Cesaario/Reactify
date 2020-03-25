@@ -1,4 +1,4 @@
-function createEventHandlers(player, state, setState) {
+export function createEventHandlers(player, state, setState) {
     player.on('initialization_error', e => { console.error(e); });
     player.on('authentication_error', e => {
         console.error(e);
@@ -40,7 +40,7 @@ function createEventHandlers(player, state, setState) {
     });
 }
 
-function onStateChanged(estado, setState) {
+export function onStateChanged(estado, setState) {
     if (estado != null) {
         const { current_track } = estado.track_window;
         setState(antigo => ({
@@ -51,7 +51,7 @@ function onStateChanged(estado, setState) {
     }
 }
 
-function getState(playerRef, setState){
+export function getState(playerRef, setState){
     if(playerRef.current){
         playerRef.current.getCurrentState().then(estado => {
             if (!estado) {
@@ -74,7 +74,7 @@ function getState(playerRef, setState){
     setTimeout(() => getState(playerRef, setState), 1000);
 }
 
-function checkForPlayer(authToken, player, setPlayer, playerRef, state, setState) {
+export function checkForPlayer(authToken, player, setPlayer, playerRef, state, setState) {
     if (window.Spotify !== null) {
         const player = new window.Spotify.Player({
             name: "Reactify",
@@ -92,7 +92,7 @@ function checkForPlayer(authToken, player, setPlayer, playerRef, state, setState
     }
 }
 
-function transferPlaybackHere(state) {
+export function transferPlaybackHere(state) {
     const { deviceId, token } = state;
     fetch("https://api.spotify.com/v1/me/player", {
         method: "PUT",
@@ -107,7 +107,7 @@ function transferPlaybackHere(state) {
     });
 }
 
-function getHashParams() {
+export function getHashParams() {
     const url = new URL(window.location.href);
     const tokens = {
         access_token: url.searchParams.get('access_token'),
@@ -116,8 +116,8 @@ function getHashParams() {
     return tokens;
 }
 
-exports.createEventHandlers = createEventHandlers;
+/*exports.createEventHandlers = createEventHandlers;
 exports.getState = getState;
 exports.checkForPlayer = checkForPlayer;
 exports.transferPlaybackHere = transferPlaybackHere;
-exports.getHashParams = getHashParams;
+exports.getHashParams = getHashParams;*/
