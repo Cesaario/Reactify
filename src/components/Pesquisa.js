@@ -35,7 +35,8 @@ function Pesquisa(props){
 
     async function pesquisarMusicas(){
         const pesquisaMusicas = await s.searchTracks(pesquisa);
-        console.log(pesquisaMusicas.tracks.items.slice(0, 5))
+        //const pesquisaArtistas = await s.searchArtists(pesquisa);
+        //console.log(pesquisaMusicas, pesquisaArtistas);
         setMusicasPesquisadas(pesquisaMusicas.tracks.items.slice(0, 5));
     }
 
@@ -51,7 +52,7 @@ function Pesquisa(props){
     return (
         <ThemeProvider theme={theme}>
             <div className='campoPesquisa'>
-                <TextField id="pesquisar" label="Pesquisar" variant="outlined" value={pesquisa} onChange={handleChange}/>
+                <TextField id="pesquisar" label="Pesquisar música" variant="outlined" value={pesquisa} onChange={handleChange}/>
                 {
                     pesquisa != '' ? (
                     <ul className='dropDown'>
