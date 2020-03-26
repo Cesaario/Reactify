@@ -42,10 +42,13 @@ export function createEventHandlers(player, state, setState) {
 
 export function onStateChanged(estado, setState) {
     if (estado != null) {
+        console.log(estado);
         const { current_track } = estado.track_window;
+        const { paused } = estado;
         setState(antigo => ({
             ...antigo,
-            musica: current_track
+            musica: current_track,
+            pausado: paused
         }));
         //setState({ ...state, trackName: current_track.name });
     }

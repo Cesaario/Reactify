@@ -27,7 +27,8 @@ function Player(){
         tempo: {
             pos: 0,
             dur: 0
-        }
+        },
+        pausado: true
     });
     const [player, setPlayer] = useState(undefined);
     const playerRef = useRef(player);
@@ -78,7 +79,7 @@ function Player(){
                     <div className='playerContainer'>
                         <Album albumUrl={state.albumUrl}></Album>
                         <Info musica={state.musica}></Info>
-                        <Controller player={player}></Controller>
+                        <Controller player={player} pausado={state.pausado}></Controller>
                         <Progress tempo={state.tempo} player={player}></Progress>
                         <Volume player={player}></Volume>
                     </div>

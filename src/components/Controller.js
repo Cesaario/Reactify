@@ -8,22 +8,18 @@ import './Controller.css'
 
 function Controller(props){
 
-    const [tocando, setTocando] = useState(false);
-    const {player} = props;
+    const {player, pausado} = props;
 
     function alternarMusica(){
         player.togglePlay();
-        setTocando(!tocando);
     }
 
     function proximaMusica(){
         player.nextTrack();
-        setTocando(true);
     }
 
     function musicaAnterior(){
         player.previousTrack();
-        setTocando(true);
     }
 
     return(
@@ -33,7 +29,7 @@ function Controller(props){
             </IconButton>
             <IconButton onClick={alternarMusica}>
                 {
-                    tocando ?
+                    !pausado ?
                     <PauseCircleFilledIcon style={{ fontSize: 40, fill: '#dddddd'}}></PauseCircleFilledIcon>
                     :
                     <PlayCircleFilledIcon style={{ fontSize: 40, fill: '#dddddd'}}></PlayCircleFilledIcon>
