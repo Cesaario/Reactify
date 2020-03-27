@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 
 import './Musicas.css'
 
 function Musicas(){
+
+    const [dialogoMusicas, setDialogoMusicas] = useState(false);
 
     return(
         <div className='containerMusica'>

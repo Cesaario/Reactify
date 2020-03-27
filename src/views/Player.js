@@ -34,6 +34,7 @@ function Player(){
         pausado: true
     });
     const [player, setPlayer] = useState(undefined);
+
     const playerRef = useRef(player);
 
     useEffect(() => {
@@ -78,21 +79,6 @@ function Player(){
             return(
                 <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
                     <ColorExtractor src={state.albumUrl} getColors={gerarCores}/>
-                    {/*
-                    <div className='barraContainer'>
-                        <Grid container direction="row" justify="center" alignItems="center" spacing={3}>
-                            <Grid item xs={4}>
-                                <Playlists></Playlists>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Pesquisa token={state.token} player={player} className='pesquisa'></Pesquisa>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Musicas></Musicas>
-                            </Grid>
-                        </Grid>
-                    </div>
-                    */}
                     <div className='barraContainer'>
                         <div className='botaoContainer' style={{display: 'flex', justifyContent: 'flex-end'}}>
                             <Playlists></Playlists>
