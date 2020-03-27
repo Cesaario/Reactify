@@ -1,0 +1,9 @@
+.botao{
+    margin-right: 50px;
+}
+
+.containerPlaylists{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -5,6 +5,9 @@ import Info from '../components/Info'
 import Controller from '../components/Controller'
 import Volume from '../components/Volume'
 import Pesquisa from '../components/Pesquisa'
+import Playlists from '../components/Playlists'
+import Musicas from '../components/Musicas'
+import Grid from '@material-ui/core/Grid';
 import { ColorExtractor } from 'react-color-extractor'
 
 import './Player.css'
@@ -75,7 +78,32 @@ function Player(){
             return(
                 <div className='playerDiv' style={{backgroundImage: `linear-gradient(${colors[0]}, ${colors[1]})`}}>
                     <ColorExtractor src={state.albumUrl} getColors={gerarCores}/>
-                    <Pesquisa token={state.token} player={player}></Pesquisa>
+                    {/*
+                    <div className='barraContainer'>
+                        <Grid container direction="row" justify="center" alignItems="center" spacing={3}>
+                            <Grid item xs={4}>
+                                <Playlists></Playlists>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Pesquisa token={state.token} player={player} className='pesquisa'></Pesquisa>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Musicas></Musicas>
+                            </Grid>
+                        </Grid>
+                    </div>
+                    */}
+                    <div className='barraContainer'>
+                        <div className='botaoContainer' style={{display: 'flex', justifyContent: 'flex-end'}}>
+                            <Playlists></Playlists>
+                        </div>
+                        <div class='pesquisaContainer'>
+                            <Pesquisa token={state.token} player={player} className='pesquisa'></Pesquisa>
+                        </div>
+                        <div className='botaoContainer' style={{display: 'flex', justifyContent: 'flex-start'}}>
+                            <Musicas></Musicas>
+                        </div>
+                    </div>
                     <div className='playerContainer'>
                         <Album albumUrl={state.albumUrl}></Album>
                         <Info musica={state.musica}></Info>

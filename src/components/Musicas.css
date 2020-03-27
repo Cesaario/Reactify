@@ -1,0 +1,9 @@
+.botao{
+    margin-left: 50px;
+}
+
+.containerMusica{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
