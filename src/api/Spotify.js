@@ -119,8 +119,5 @@ export function getHashParams() {
     return tokens;
 }
 
-/*exports.createEventHandlers = createEventHandlers;
-exports.getState = getState;
-exports.checkForPlayer = checkForPlayer;
-exports.transferPlaybackHere = transferPlaybackHere;
-exports.getHashParams = getHashParams;*/
+const Spotify = require('spotify-web-api-js');
+export const spotifyAPI = new Spotify();

@@ -3,11 +3,9 @@ import TextField from '@material-ui/core/TextField';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { grey } from '@material-ui/core/colors';
 import Play from '../api/PlayURI'
+import { spotifyAPI } from '../api/Spotify'
 
 import './Pesquisa.css'
-
-var Spotify = require('spotify-web-api-js');
-var s = new Spotify();
 
 function Pesquisa(props){
 
@@ -16,7 +14,7 @@ function Pesquisa(props){
 
     useEffect(() => {
         const {token} = props;
-        s.setAccessToken(token);
+        spotifyAPI.setAccessToken(token);
     }, []);
 
     useEffect(() => {
@@ -34,7 +32,7 @@ function Pesquisa(props){
     }
 
     async function pesquisarMusicas(){
-        const pesquisaMusicas = await s.searchTracks(pesquisa);
+        const pesquisaMusicas = await spotifyAPI.searchTracks(pesquisa);
         //const pesquisaArtistas = await s.searchArtists(pesquisa);
         //console.log(pesquisaMusicas, pesquisaArtistas);
         setMusicasPesquisadas(pesquisaMusicas.tracks.items.slice(0, 5));
