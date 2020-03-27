@@ -97,7 +97,7 @@ function Player(){
                         <div className='botaoContainer' style={{display: 'flex', justifyContent: 'flex-end'}}>
                             <Playlists></Playlists>
                         </div>
-                        <div class='pesquisaContainer'>
+                        <div className='pesquisaContainer'>
                             <Pesquisa token={state.token} player={player} className='pesquisa'></Pesquisa>
                         </div>
                         <div className='botaoContainer' style={{display: 'flex', justifyContent: 'flex-start'}}>
