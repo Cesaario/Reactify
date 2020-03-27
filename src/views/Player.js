@@ -12,7 +12,7 @@ import { ColorExtractor } from 'react-color-extractor'
 
 import './Player.css'
 
-import { getState, checkForPlayer, transferPlaybackHere, getHashParams } from '../Spotify'
+import { getState, checkForPlayer, transferPlaybackHere, getHashParams } from '../api/Spotify'
 
 //import Spotify from "spotify-web-api-js";
 //const s = new Spotify();

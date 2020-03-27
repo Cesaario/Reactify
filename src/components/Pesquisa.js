@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import TextField from '@material-ui/core/TextField';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { grey } from '@material-ui/core/colors';
-import Play from '../PlayURI'
+import Play from '../api/PlayURI'
 
 import './Pesquisa.css'
 
