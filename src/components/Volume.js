@@ -29,6 +29,8 @@ function Volume(props){
 
     useEffect(() => {
         setInterval(getVolume, 1000);
+        const { player } = props;
+        player.setVolume(0.5);
     }, []);
 
     function handleChange(event, val){
