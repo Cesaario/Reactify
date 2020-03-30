@@ -13,11 +13,6 @@ function Pesquisa(props){
     const [musicasPesquisadas, setMusicasPesquisadas] = useState([]);
 
     useEffect(() => {
-        const {token} = props;
-        spotifyAPI.setAccessToken(token);
-    }, []);
-
-    useEffect(() => {
         pesquisarMusicas();
     }, [pesquisa]);
 

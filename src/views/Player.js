@@ -9,6 +9,7 @@ import Playlists from '../components/Playlists'
 import Musicas from '../components/Musicas'
 import Grid from '@material-ui/core/Grid';
 import { ColorExtractor } from 'react-color-extractor'
+import { spotifyAPI } from '../api/Spotify'
 
 import './Player.css'
 
@@ -44,6 +45,7 @@ function Player(){
             token: access_token
         }));
         setTimeout(() => getState(playerRef, setState), 1000);
+        spotifyAPI.setAccessToken(access_token);
     }, []);
 
     useEffect(() => {
