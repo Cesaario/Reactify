@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import Divider from '@material-ui/core/Divider';
@@ -10,6 +10,11 @@ import './Musicas.css'
 function Musicas(){
 
     const [dialogoMusicas, setDialogoMusicas] = useState(false);
+    const [minhasMusicas, setMinhasMusica] = useState([]);
+
+    useEffect(() => {
+        
+    }, []);
 
     return(
         <div className='containerMusica'>
@@ -21,14 +26,77 @@ function Musicas(){
                     <div className='containerTitulo'>
                         <h1 className='tituloDialogo'>Minhas músicas</h1>
                     </div>
-                    
                     <div className='containerMusicas'>
-                    <div className='itemMusica'>
+                        {/*<div className='itemMusica'>
                             <IconButton>
                                 <PlayCircleFilledIcon style={{ fontSize: 40, fill: '#dddddd'}}></PlayCircleFilledIcon>
                             </IconButton>
                             <span>Reapers - Muse</span>
-                        </div>
+                        </div>*/}
+                        <table className='tabelaMusicas'>
+                            <tr>
+                                <th></th>
+                                <th>Nome</th>
+                                <th>Artista</th>
+                                <th>Álbum</th>
+                                <th>Duração</th>
+                            </tr>
+                            <tr>
+                                <td className='botao'>
+                                    <IconButton>
+                                        <PlayCircleFilledIcon style={{ fontSize: 40, fill: '#dddddd'}}></PlayCircleFilledIcon>
+                                    </IconButton>
+                                </td>
+                                <td>Reapers</td>
+                                <td>Muse</td>
+                                <td>Drones</td>
+                                <td>6:00</td>
+                            </tr>
+                            <tr>
+                                <td className='botao'>
+                                    <IconButton>
+                                        <PlayCircleFilledIcon style={{ fontSize: 40, fill: '#dddddd'}}></PlayCircleFilledIcon>
+                                    </IconButton>
+                                </td>
+                                <td>Reapers</td>
+                                <td>Muse</td>
+                                <td>Drones</td>
+                                <td>6:00</td>
+                            </tr>
+                            <tr>
+                                <td className='botao'>
+                                    <IconButton>
+                                        <PlayCircleFilledIcon style={{ fontSize: 40, fill: '#dddddd'}}></PlayCircleFilledIcon>
+                                    </IconButton>
+                                </td>
+                                <td>Reapers</td>
+                                <td>Muse</td>
+                                <td>Drones</td>
+                                <td>6:00</td>
+                            </tr>
+                            <tr>
+                                <td className='botao'>
+                                    <IconButton>
+                                        <PlayCircleFilledIcon style={{ fontSize: 40, fill: '#dddddd'}}></PlayCircleFilledIcon>
+                                    </IconButton>
+                                </td>
+                                <td>Reapers</td>
+                                <td>Muse</td>
+                                <td>Drones</td>
+                                <td>6:00</td>
+                            </tr>
+                            <tr>
+                                <td className='botao'>
+                                    <IconButton>
+                                        <PlayCircleFilledIcon style={{ fontSize: 40, fill: '#dddddd'}}></PlayCircleFilledIcon>
+                                    </IconButton>
+                                </td>
+                                <td>Reapers</td>
+                                <td>Muse</td>
+                                <td>Drones</td>
+                                <td>6:00</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </Dialog>

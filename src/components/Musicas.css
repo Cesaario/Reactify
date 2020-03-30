@@ -28,12 +28,10 @@
     margin-bottom: 0px;
     text-shadow: 1px 1px 5px #333333;
     font-weight: 100;
-    color: #eeeeee
+    color: #eee
 }
 
 .containerMusicas{
-    margin-top: 50px;
-    margin-left: 150px;
     display: flex;
     flex-direction: column;
 }
@@ -51,4 +49,33 @@
     text-shadow: 1px 1px 5px #333333;
     font-weight: 100;
     color: #eeeeee
+}
+
+.tabelaMusicas{
+    width: 100%;
+    font-family: 'Roboto';
+    border-collapse: collapse;
+}
+
+.tabelaMusicas th{
+    font-weight: bold;
+    color: #aaa;
+    text-shadow: 3px 3px 5px #333333;
+    text-align: center;
+    padding: 8px;
+}
+
+.tabelaMusicas td{
+    color: #eee;
+    text-align: center;
+    padding: 8px;
+}
+
+.tabelaMusicas tr:hover{
+    background-color: rgba(45,45,45,0.2);;
+}
+
+.botao{
+    padding-left: 20px !important;
+    width: 50px;
 }
